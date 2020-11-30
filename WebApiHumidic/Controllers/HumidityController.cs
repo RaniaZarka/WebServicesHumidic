@@ -94,8 +94,9 @@ namespace WebApiHumidic.Controllers
                 databaseconnection.Open();
                 using (SqlCommand insertCommand = new SqlCommand(insertHumiditySql, databaseconnection))
                 {
-                    insertCommand.Parameters.AddWithValue("@level", value.Level);
                     insertCommand.Parameters.AddWithValue("@date", value.Date);
+                    insertCommand.Parameters.AddWithValue("@level", value.Level);
+                    
                     int rowaffected = insertCommand.ExecuteNonQuery();
                     Console.WriteLine($"rows affected: {rowaffected}");
                 }
