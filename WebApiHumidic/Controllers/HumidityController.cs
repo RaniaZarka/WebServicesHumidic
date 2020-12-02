@@ -46,44 +46,100 @@ namespace WebApiHumidic.Controllers
 
 
         }
-        //// GET: api/Humidity
-        //[HttpGet(("byDate/{date}"), Name = "GetByDay")]
-        //public IEnumerable<Humidity> Get1Day()
-        //{
-        //    var humidityList = new List<Humidity>();
+        // GET: api/Humidity
+        [HttpGet(("byDate/{date}"), Name = "GetByToday")]
+        public IEnumerable<Humidity> Get1Day()
+        {
+            var humidityList = new List<Humidity>();
 
-        //    string selectall = "select * from HumidityLevel WHERE date < NOW() - INTERVAL 1 DAY";
+            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -1, GETDATE())";
 
-        //    using (SqlConnection databaseConnection = new SqlConnection(conn))
-        //    {
-        //        using (SqlCommand selectCommand = new SqlCommand(selectall, databaseConnection))
-        //        {
-        //            databaseConnection.Open();
+            using (SqlConnection databaseConnection = new SqlConnection(conn))
+            {
+                using (SqlCommand selectCommand = new SqlCommand(selectall, databaseConnection))
+                {
+                    databaseConnection.Open();
 
-        //            using (SqlDataReader reader = selectCommand.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    DateTime date = reader.GetDateTime(0);
-        //                    int level = reader.GetInt32(1);
+                    using (SqlDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime date = reader.GetDateTime(0);
+                            int level = reader.GetInt32(1);
 
-        //                    humidityList.Add(new Humidity(date, level));
+                            humidityList.Add(new Humidity(date, level));
 
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return humidityList;
-        //    //SELECT* from Results WHERE date < NOW() - INTERVAL 30 DAY;
+                        }
+                    }
+                }
+            }
+            return humidityList;
+            //SELECT* from Results WHERE date < NOW() - INTERVAL 30 DAY;
 
-        //}
-        // GET: api/Humidity/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        }
+        // GET: api/Humidity
+        [HttpGet(("byDate/{date}"), Name = "GetBy3days")]
+        public IEnumerable<Humidity> Get3Days()
+        {
+            var humidityList = new List<Humidity>();
 
+            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -3, GETDATE())";
+
+            using (SqlConnection databaseConnection = new SqlConnection(conn))
+            {
+                using (SqlCommand selectCommand = new SqlCommand(selectall, databaseConnection))
+                {
+                    databaseConnection.Open();
+
+                    using (SqlDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime date = reader.GetDateTime(0);
+                            int level = reader.GetInt32(1);
+
+                            humidityList.Add(new Humidity(date, level));
+
+                        }
+                    }
+                }
+            }
+            return humidityList;
+            
+
+        }
+
+        // GET: api/Humidity
+        [HttpGet(("byDate/{date}"), Name = "GetBy7days")]
+        public IEnumerable<Humidity> Get7Day()
+        {
+            var humidityList = new List<Humidity>();
+
+            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -7, GETDATE())";
+
+            using (SqlConnection databaseConnection = new SqlConnection(conn))
+            {
+                using (SqlCommand selectCommand = new SqlCommand(selectall, databaseConnection))
+                {
+                    databaseConnection.Open();
+
+                    using (SqlDataReader reader = selectCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime date = reader.GetDateTime(0);
+                            int level = reader.GetInt32(1);
+
+                            humidityList.Add(new Humidity(date, level));
+
+                        }
+                    }
+                }
+            }
+            return humidityList;
+            
+
+        }
         // POST: api/Humidity
         [HttpPost]
         public void Post([FromBody] Humidity value)
@@ -105,23 +161,13 @@ namespace WebApiHumidic.Controllers
 
         }
 
-        // PUT: api/Humidity/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(DateTime date)
         {
-            //DELETE FROM Table_name
-            // WHERE Date_column<GETDATE() -7
-            //...or this:
-            //DELETE FROM Table_name
-            //WHERE Date_column < DATEADD(dd, -7, GETDATE())
-
-            string deleteHumidity = "delete from humidityLevel where date = @date";
+         
+           string deleteHumidity = "DELETE FROM HumidityLevel WHERE Date < DATEADD(dd, -7, GETDATE())";
             using (SqlConnection databaseConnection = new SqlConnection())
             {
                 databaseConnection.Open();
