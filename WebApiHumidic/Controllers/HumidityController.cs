@@ -77,6 +77,9 @@ namespace WebApiHumidic.Controllers
             //SELECT* from Results WHERE date < NOW() - INTERVAL 30 DAY;
 
         }
+
+       
+
         // GET: api/Humidity
         [HttpGet(("byDate/{date}"), Name = "GetBy3days")]
         public IEnumerable<Humidity> Get3Days()
@@ -163,7 +166,7 @@ namespace WebApiHumidic.Controllers
 
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{date}")]
         public void Delete(DateTime date)
         {
          

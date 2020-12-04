@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiHumidic", "WebApiHumidic.csproj", "{C5568FE5-20CA-4C2B-ACB4-01CC78FEDEA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiHumidic", "WebApiHumidic.csproj", "{C5568FE5-20CA-4C2B-ACB4-01CC78FEDEA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumidicWebUnitTest", "..\HumidicWebUnitTest\HumidicWebUnitTest.csproj", "{5BFA619F-3BF3-4FFA-9C0E-BB1C26923B4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumidicWebUnitTest", "..\HumidicWebUnitTest\HumidicWebUnitTest.csproj", "{5BFA619F-3BF3-4FFA-9C0E-BB1C26923B4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
