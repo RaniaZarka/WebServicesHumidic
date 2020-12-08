@@ -9,12 +9,12 @@ using WebApiHumidic.Model;
 
 namespace WebApiHumidic.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class HumidityController : ControllerBase
     {
         public const string conn = "Server=tcp:humidity.database.windows.net,1433;Initial Catalog=Humidity;Persist Security Info=False;User ID=team;Password=Humidity!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        //public const string conn = "Data Source=humidity.database.windows.net;Initial Catalog=Humidity;User ID=team;Password=Humidity!;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        
         // GET: api/Humidity
         [HttpGet]
         public IEnumerable<Humidity> Get()
@@ -47,7 +47,7 @@ namespace WebApiHumidic.Controllers
 
         }
         // GET: api/Humidity
-        [HttpGet(("byDate/{date}"), Name = "GetByToday")]
+        [HttpGet(("1day"), Name = "GetByToday")]
         public IEnumerable<Humidity> Get1Day()
         {
             var humidityList = new List<Humidity>();
@@ -81,7 +81,7 @@ namespace WebApiHumidic.Controllers
        
 
         // GET: api/Humidity
-        [HttpGet(("byDate/{date}"), Name = "GetBy3days")]
+        [HttpGet(("3days"), Name = "GetBy3days")]
         public IEnumerable<Humidity> Get3Days()
         {
             var humidityList = new List<Humidity>();
@@ -113,7 +113,7 @@ namespace WebApiHumidic.Controllers
         }
 
         // GET: api/Humidity
-        [HttpGet(("byDate/{date}"), Name = "GetBy7days")]
+        [HttpGet(("7days"), Name = "GetBy7days")]
         public IEnumerable<Humidity> Get7Day()
         {
             var humidityList = new List<Humidity>();

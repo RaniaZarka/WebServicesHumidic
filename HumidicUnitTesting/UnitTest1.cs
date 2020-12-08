@@ -1,45 +1,46 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebApiHumidic.Controllers;
 using WebApiHumidic.Model;
-using Xunit;
 
-namespace HumidicWebUnitTest
+namespace HumidicUnitTesting
 {
+    [TestClass]
     public class UnitTest1
     {
+        
+
         HumidityController hc = new HumidityController();
-
-
         private List<Humidity> GetHumidities()
         {
-            IEnumerable<Humidity> theList = hc.Get(); 
-           List<Humidity> HumidicList = theList.ToList();
+            IEnumerable<Humidity> theList = hc.Get();
+            List<Humidity> HumidicList = theList.ToList();
 
             return HumidicList;
         }
 
-     
 
 
-        [Fact]
+
+        [TestMethod]
         public void GetAllMethodTest()
         {
-            // Act
-            var testProducts = GetHumidities();
+            // Arrange
             
-            var result = hc.Get() as List<Humidity>;
+            var testProducts = GetHumidities();
 
-            // Assert
-            Xunit.Assert.NotNull(result);
+            //Act
+            var result = hc.Get() as List<Humidity>;
           
-            Xunit.Assert.Equal(testProducts.Count, result.Count);
+            //Assert
+            Assert.AreEqual(testProducts.Count, result.Count);
         }
 
-       
 
-        [Fact]
+
+        [TestMethod]
         public void TestPropertyLevel()
         {
             //Arrange
@@ -53,12 +54,12 @@ namespace HumidicWebUnitTest
 
             // Assert
 
-            Xunit.Assert.Equal(h.Level, Level);
+            Assert.AreEqual(h.Level, Level);
 
         }
 
 
-        [Fact]
+        [TestMethod]
         public void TestPropertyDate()
         {
             //Arrange
@@ -72,12 +73,8 @@ namespace HumidicWebUnitTest
 
             // Assert
 
-            Xunit.Assert.Equal(h.Date, date);
+            Assert.AreEqual(h.Date, date);
 
         }
-
-
-
     }
 }
-
