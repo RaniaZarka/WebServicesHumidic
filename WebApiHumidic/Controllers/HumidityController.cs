@@ -52,7 +52,7 @@ namespace WebApiHumidic.Controllers
         {
             var humidityList = new List<Humidity>();
 
-            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -1, GETDATE())";
+            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -1, GETDATE()) order by Date DESC";
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
@@ -86,7 +86,7 @@ namespace WebApiHumidic.Controllers
         {
             var humidityList = new List<Humidity>();
 
-            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -3, GETDATE())";
+            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -3, GETDATE()) order by Date DESC";
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
@@ -118,7 +118,7 @@ namespace WebApiHumidic.Controllers
         {
             var humidityList = new List<Humidity>();
 
-            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -7, GETDATE())";
+            string selectall = "SELECT * FROM HumidityLevel WHERE Date >= DATEADD(day, -7, GETDATE()) order by Date DESC";
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
@@ -170,7 +170,7 @@ namespace WebApiHumidic.Controllers
         public void Delete(DateTime date)
         {
          
-           string deleteHumidity = "DELETE FROM HumidityLevel WHERE Date < DATEADD(dd, -7, GETDATE())";
+           string deleteHumidity = "DELETE * FROM HumidityLevel WHERE @date < DATEADD(dd, -7, GETDATE())";
             using (SqlConnection databaseConnection = new SqlConnection())
             {
                 databaseConnection.Open();

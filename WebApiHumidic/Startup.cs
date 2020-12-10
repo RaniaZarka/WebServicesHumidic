@@ -19,6 +19,30 @@ namespace WebApiHumidic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors(options =>
+            {
+                // 1 st policy --> allow specific origin
+                options.AddPolicy("AllowSpecificOrigins",
+                builder =>
+                {
+                    builder.WithOrigins("https://azure.microsoft.com/").AllowAnyHeader().AllowAnyMethod();
+                });
+
+                // 2nd Policy --> allow any origins -- Now you have to public your services
+                options.AddPolicy("AllowAnyOrigins",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+
+                // 3rd Policy --> allow only Get Put Method 
+                options.AddPolicy("AllowAnyOriginsGetPUT",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().WithMethods("GET", "POST");
+                });
+            });
             //      services.AddDbContext<TodoContext>(opt =>
             //opt.UseInMemoryDatabase("TodoList"));
             services.AddControllers();
@@ -51,7 +75,7 @@ namespace WebApiHumidic
                 c.RoutePrefix = string.Empty;
             });
 
-
+            app.UseCors("AllowAnyOrigins");
             app.UseRouting();
 
             app.UseAuthorization();
